@@ -76,13 +76,23 @@ function getFinance(code) {
   I = reg.exec(match[0])[1].replace('<dd>', '').replace(/\s+/g, '');
 
   //PER
-  reg = /<td>[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?<span class="fs9">倍/g;
+  reg = /<td>[－]?([0-9]+(,[0-9]*)?(\.[0-9]*)?|\.[0-9]+)?<span class="fs9">倍/g;
   match = content.match(reg);
-  J = reg.exec(match[0])[1].replace(/\s+/g, '');
+  if (reg.exec(match[0])[1] == undefined) {
+    J = '－';
+  } else {
+    match = content.match(reg);
+    J = reg.exec(match[0])[1].replace(/\s+/g, '');
+  }
 
   //PBR
   match = content.match(reg);
-  K = reg.exec(match[1])[1].replace(/\s+/g, '');
+  if (reg.exec(match[1])[1] == undefined) {
+    K = '－';
+  } else {
+    match = content.match(reg);
+    K = reg.exec(match[1])[1].replace(/\s+/g, '');
+  }
 
   //前日終値
   reg = /<dt>前日終値<\/dt>([\s\S]*?)&nbsp;/g;
